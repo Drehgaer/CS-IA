@@ -38,18 +38,13 @@ public class MaineFrame extends JFrame implements ActionListener {
         this.setPreferredSize(dimension);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         model = new DefaultTableModel(0, 4){
-            String [] columnNames = {"EAN", "Name", "Category", "Available"};
+            final String [] columnNames = {"EAN", "Name", "Category", "Available"};
             @Override
             public String getColumnName(int index) {
                 return columnNames[index];
             }
         };
         table = new JTable(model);
-        /*table.setValueAt("EAN", 0, 0);
-        table.setValueAt("Name", 0, 1);
-        table.setValueAt("Category", 0, 2);
-        table.setValueAt("Available", 0, 3);
-         */
         //this.setLayout(layout);
         left = new JPanel();
         top = new JPanel();
