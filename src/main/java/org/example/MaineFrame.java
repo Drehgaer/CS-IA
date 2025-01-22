@@ -110,7 +110,7 @@ public class MaineFrame extends JFrame implements ActionListener {
                 File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
                 try {
                     this.showTable(ExcelReader.readExcelFile(file));
-                    CsvExport.exportToCSV(table, "tempMainTable.csv");
+                    CsvExport.storeTable(table, "tempMainTable.csv");
                 } catch (FileNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
