@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -144,7 +145,9 @@ public class MaineFrame extends JFrame implements ActionListener {
             thread2.start();
         }
         if(e.getSource()== export) {
-            CsvExport.exportToCSV(table, "raport.csv");
+            long time = System.currentTimeMillis();
+            java.util.Date timeAndDate =new java.util.Date(time);
+            CsvExport.exportToCSV(table, ("report-" + timeAndDate + ".csv"));
         }
         if(e.getSource()== filterClearButton) {
             try {

@@ -6,6 +6,7 @@ import javax.swing.table.TableModel;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class CsvExport {
     public static void storeTable(JTable tableToExport, String fileName) {
@@ -23,10 +24,10 @@ public class CsvExport {
             e.printStackTrace();
         }
     }
-    public static void exportToCSV(JTable tableToExport, String fileName) {
+    public static void exportToCSV(JTable tableToExport, String fileName) {;
         try {
             TableModel model = tableToExport.getModel();
-            FileWriter csv = new FileWriter(fileName);
+            FileWriter csv = new FileWriter("exports/" + fileName);
             System.out.println(model.getColumnCount());
             for (int i = 0; i < model.getColumnCount(); i++) {
                 csv.write(model.getColumnName(i) + ",");
