@@ -89,6 +89,7 @@ public class MaineFrame extends JFrame implements ActionListener {
 
         //this.add(textField, BorderLayout.CENTER);
         //this.add(table);
+
         this.getContentPane().add(scrollableTable);
         this.setJMenuBar(mb);
         this.setVisible(true);
@@ -122,7 +123,7 @@ public class MaineFrame extends JFrame implements ActionListener {
                 @Override
                 public void run() {
                     try {
-                        thread2.sleep(100);
+                        Thread.sleep(100);
                     } catch (InterruptedException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -132,7 +133,7 @@ public class MaineFrame extends JFrame implements ActionListener {
                     t = filterFrame.getT();
                         System.out.print("");
                     }
-                    Boolean filters [] = filterFrame.getFilters();
+                    Boolean[] filters = filterFrame.getFilters();
                     System.out.println(filters[0]);
                     System.out.println(filters[1]);
                     System.out.println(filters[2]);
@@ -197,11 +198,11 @@ public class MaineFrame extends JFrame implements ActionListener {
         String filteredEan;
         String filteredName;
         ProductCategory filteredCategory;
-        Boolean filteredAvailable;
+        boolean filteredAvailable;
         filteredEan = table.getValueAt(i, 0).toString();
         filteredName = table.getValueAt(i, 1).toString();
         filteredCategory = ProductCategory.valueOf(table.getValueAt(i, 2).toString());
-        filteredAvailable = Boolean.valueOf(table.getValueAt(i, 3).toString());
+        filteredAvailable = Boolean.parseBoolean(table.getValueAt(i, 3).toString());
         list.add(new Product(filteredEan,filteredName,filteredCategory,filteredAvailable));
     }
 
