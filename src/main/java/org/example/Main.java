@@ -18,7 +18,5 @@ public class Main {
         //productList[3] = testproduct4;
         //System.out.println(testproduct1.ean);
         //frame.showTable(productList);
-        XmlExport export = new XmlExport();
-        export.saveToXML("b");
     }
 }
