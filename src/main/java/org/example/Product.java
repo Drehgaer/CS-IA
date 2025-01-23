@@ -3,7 +3,17 @@ package org.example;
 public class Product {
     String ean;
     String name;
+    String seriesName;
     ProductCategory category;
+    String subCategory;
+    String shortDescription;
+    String longDescription;
+    String Vat;
+    double grossPrice;
+    double netPrice;
+
+
+
     boolean available;
     Product (String ean, String name, ProductCategory category, boolean available) {
         this.ean = ean;
