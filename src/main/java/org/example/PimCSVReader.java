@@ -44,7 +44,8 @@ public class PimCSVReader {
                     newAvailable = Boolean.valueOf((Arrays.toString(reader.readNext())).replace("[", "").replace("]", ""));
                 }
             }
-            list.add(new Product(newEan, newName, newCategory, newAvailable));
+            //TODO - adjust it for current table size
+            //list.add(new Product(newEan, newName, newCategory, newAvailable));
         }
         Product [] newProductList = list.toArray(new Product[list.size()]);
         return newProductList;

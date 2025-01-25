@@ -1,24 +1,32 @@
 package org.example;
 
 public class Product {
+    String id;
     String ean;
+    String sku;
     String name;
     String seriesName;
     ProductCategory category;
-    String subCategory;
-    String shortDescription;
-    String longDescription;
-    String Vat;
-    double grossPrice;
-    double netPrice;
-
-
-
+    String description;
+    String grossPrice;
+    String netPrice;
+    String url;
+    String parameters;
     boolean available;
-    Product (String ean, String name, ProductCategory category, boolean available) {
+
+
+    Product (String id, String ean, String sku, String name, String seriesName, String description, ProductCategory category, String grossPrice, String netPrice, String url, String parameters, boolean available ) {
+        this.id = id;
         this.ean = ean;
+        this.sku = sku;
         this.name = name;
+        this.seriesName = seriesName;
+        this.description = description;
         this.category = category;
+        this.grossPrice = grossPrice;
+        this.netPrice = netPrice;
+        this.url = url;
+        this.parameters = parameters;
         this.available = available;
     }
     /*public static boolean isValidEAN(String ean) {
@@ -27,19 +35,25 @@ public class Product {
             return false;
         }
     */
-
+    public String getId() {return id;}
     public String getEan() {
         return ean;
     }
+    public String getSku() {return sku;}
     public String getName() {
         return name;
     }
+    public String getSeriesName() {return seriesName;}
+    public String getDescription() {return description;}
     public ProductCategory getCategory() {return category;}
-    public boolean isAvailable() {
-        return available;
-    }
+    public String getGrossPrice(){return grossPrice;}
+    public String getNetPrice(){return netPrice;}
+    public String getUrl() {return url;}
+    public String getParameters() {return parameters;}
+    public boolean isAvailable() {return available;}
+
+
 }
 /*TO D0
 - ean walidacja
-- zmienić category na enum
 */

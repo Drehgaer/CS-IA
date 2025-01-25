@@ -17,9 +17,17 @@ public class ExcelReader {
     public static Product[] readExcelFile(File excelFile) throws FileNotFoundException {
         String string = "";
         String temp = "";
+        String newId = "";
         String newEan = "";
+        String newSku = "";
         String newName = "";
+        String newSeriesName = "";
+        String newDescription = "";
         ProductCategory newCategory = null;
+        String newGrossPrice = "";
+        String newNetPrice = "";
+        String newUrl = "";
+        String newParameters = "";
         Boolean newAvailable = false;
         List<Product> list = new ArrayList<Product>();
         Integer i = -1;
@@ -44,12 +52,10 @@ public class ExcelReader {
             Row row = rowIterator.next();
             //For each row, iterate through all the columns
             Iterator<Cell> cellIterator = row.cellIterator();
-            while (cellIterator.hasNext())
-            {
+            while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
                 //Check the cell type and format accordingly
-                switch (cell.getCellType())
-                {
+                switch (cell.getCellType()) {
                     case CellType.NUMERIC:
                         System.out.print(cell.getNumericCellValue() + "\t");
                         string = string + cell.getNumericCellValue() + "\t";
@@ -71,34 +77,39 @@ public class ExcelReader {
                         i++;
                      */
                 }
-                if (i == 0){
+                System.out.println(i);
+                if (i ==0){
+                    newId = temp;
+                }else if (i == 1){
                     newEan = temp;
-                }else if (i == 1) {
-                    newName = temp;
-                }else if (i == 2) {
-                    //System.out.println(temp);
-                    //System.out.println(i);
-                   /* if (temp == "test_category1") {
-                        newCategory = test_category1;
-                    } else if (temp == "test_category2") {
-                        newCategory = test_category2;
-                    } else if (temp == "test_category3") {
-                        newCategory = test_category3;
-                    } else {
-                        System.out.println("Wrong product category");
-                    }
-                    */
-                    newCategory = ProductCategory.valueOf(temp);
+                }else if (i == 2){
+                    newSku = temp;
                 }else if (i == 3) {
+                    newName = temp;
+                }else if (i == 4) {
+                    newSeriesName = temp;
+                }else if (i == 5) {
+                    newDescription = temp;
+                } else if (i == 6) {
+                    newCategory = ProductCategory.valueOf(temp);
+                }else if (i == 7){
+                    newGrossPrice = temp;
+                }else if (i == 8){
+                    newNetPrice = temp;
+                }else if (i == 9){
+                    newUrl = temp;
+                }else if (i == 10){
+                    newParameters = temp;
+                } else if (i == 11) {
                     newAvailable = Boolean.valueOf(temp);
                 }
                 string = string + "\n";
             }
-            oldCont = oldCont + 4;
-            //System.out.println(cont);
-            //System.out.println(oldCont);
+            oldCont = oldCont + 12;
+            System.out.println(cont);
+            System.out.println(oldCont);
             if (cont > oldCont) {
-                list.add(new Product(newEan, newName, newCategory, newAvailable));
+                list.add(new Product(newId, newEan, newSku, newName, newSeriesName, newDescription, newCategory, newGrossPrice, newNetPrice, newUrl, newParameters, newAvailable));
             }
             System.out.print("");
         }

@@ -38,8 +38,8 @@ public class MaineFrame extends JFrame implements ActionListener {
     MaineFrame(){
         this.setPreferredSize(dimension);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        model = new DefaultTableModel(0, 4){
-            final String [] columnNames = {"EAN", "Name", "Category", "Available"};
+        model = new DefaultTableModel(0, 12){
+            final String [] columnNames = {"ID","EAN","SKU", "Name", "Series Name", "Description", "Category", "Price(gross)", "Price(net)", "URL", "Parameters", "Available"};
             @Override
             public String getColumnName(int index) {
                 return columnNames[index];
@@ -107,7 +107,7 @@ public class MaineFrame extends JFrame implements ActionListener {
                 File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
                 try {
                     this.showTable(ExcelReader.readExcelFile(file));
-                    CsvExport.storeTable(table, "tempMainTable.csv");
+                    //CsvExport.storeTable(table, "tempMainTable.csv");
                 } catch (FileNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -164,10 +164,18 @@ public class MaineFrame extends JFrame implements ActionListener {
             //model.addRow(new Vector<>());
             //numberOfRows++;
             //System.out.println(numberOfRows);
-            table.setValueAt(products[i].getEan(), i, 0);
-            table.setValueAt(products[i].getName(), i, 1);
-            table.setValueAt(products[i].getCategory(), i, 2);
-            table.setValueAt(products[i].isAvailable(), i, 3);
+            table.setValueAt(products[i].getId(), i, 0);
+            table.setValueAt(products[i].getEan(), i, 1);
+            table.setValueAt(products[i].getSku(), i, 2);
+            table.setValueAt(products[i].getName(), i, 3);
+            table.setValueAt(products[i].getSeriesName(), i, 4);
+            table.setValueAt(products[i].getDescription(), i, 5);
+            table.setValueAt(products[i].getCategory(), i, 6);
+            table.setValueAt(products[i].getGrossPrice(), i, 7);
+            table.setValueAt(products[i].getNetPrice(), i, 8);
+            table.setValueAt(products[i].getUrl(), i, 9);
+            table.setValueAt(products[i].getParameters(), i, 10);
+            table.setValueAt(products[i].isAvailable(), i, 11);
         }
         //System.out.println(table.getValueAt(0, 2));
     }
@@ -206,7 +214,8 @@ public class MaineFrame extends JFrame implements ActionListener {
         filteredName = table.getValueAt(i, 1).toString();
         filteredCategory = ProductCategory.valueOf(table.getValueAt(i, 2).toString());
         filteredAvailable = Boolean.parseBoolean(table.getValueAt(i, 3).toString());
-        list.add(new Product(filteredEan,filteredName,filteredCategory,filteredAvailable));
+        //TODO - adjust it for current table size
+        //list.add(new Product(filteredEan,filteredName,filteredCategory,filteredAvailable));
     }
 
     public int getNumberOfRows(){

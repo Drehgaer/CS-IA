@@ -7,10 +7,11 @@ import static org.example.ProductCategory.*;
 public class Main {
     public static void main(String[] args) {
         MaineFrame frame = new MaineFrame();
-        Product testproduct1 = new Product("1234567890123", "test_name1", test_category1, true);
+        /*Product testproduct1 = new Product("1234567890123", "test_name1", test_category1, true);
         Product testproduct2 = new Product("9087654321908", "test_name2", test_category2, true);
         Product testproduct3 = new Product("9987657821907", "test_name3", test_category1, true);
         Product testproduct4 = new Product("5586657521021", "test_name4", test_category3, false);
+         */
         //Product productList [] = new Product[100000];
         //productList[0] = testproduct1;
         //productList[1] = testproduct2;
