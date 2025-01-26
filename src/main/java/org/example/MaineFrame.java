@@ -44,6 +44,11 @@ public class MaineFrame extends JFrame implements ActionListener {
             public String getColumnName(int index) {
                 return columnNames[index];
             }
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
         };
         table = new JTable(model);
         //this.setLayout(layout);
@@ -160,6 +165,7 @@ public class MaineFrame extends JFrame implements ActionListener {
     public void showTable(Product[] products){
         numberOfRows = products.length;
         model.setRowCount(products.length);
+        table.setPreferredSize(new Dimension(1000, 16*numberOfRows));
         for (int i = 0; i < products.length; i++) {
             //model.addRow(new Vector<>());
             //numberOfRows++;
@@ -189,11 +195,7 @@ public class MaineFrame extends JFrame implements ActionListener {
             ProductCategory filteredCategory;
             Boolean filteredAvailable;
             for (int i = 0; i < numberOfRows; i++) {
-                if((table.getValueAt(i, 2).toString()).equals("test_category1")&& selectedFilters[0]){
-                    filterTableAddProduct(list, i);
-                }else if ((table.getValueAt(i, 2).toString()).equals("test_category2")&& selectedFilters[1]) {
-                    filterTableAddProduct(list, i);
-                } else if ((table.getValueAt(i, 2).toString()).equals("test_category3")&& selectedFilters[2]) {
+                if(selectedFilters[Product.getCategoryIndex((ProductCategory) table.getValueAt(i, 6))]){
                     filterTableAddProduct(list, i);
                 }
             }
@@ -206,16 +208,33 @@ public class MaineFrame extends JFrame implements ActionListener {
     }
 
     private void filterTableAddProduct(List<Product> list, int i) {
+        int filteredId;
         String filteredEan;
+        String filteredSku;
         String filteredName;
+        String filteredSeriesName;
+        String filteredDescription;
         ProductCategory filteredCategory;
+        double filteredGrossPrice;
+        double filteredNetPrice;
+        String filteredUrl;
+        String filteredParameters;
         boolean filteredAvailable;
-        filteredEan = table.getValueAt(i, 0).toString();
-        filteredName = table.getValueAt(i, 1).toString();
-        filteredCategory = ProductCategory.valueOf(table.getValueAt(i, 2).toString());
-        filteredAvailable = Boolean.parseBoolean(table.getValueAt(i, 3).toString());
+
+        filteredId = (int) table.getValueAt(i, 0);
+        filteredEan = table.getValueAt(i, 1).toString();
+        filteredSku = table.getValueAt(i, 2).toString();
+        filteredName = table.getValueAt(i, 3).toString();
+        filteredSeriesName = table.getValueAt(i, 4).toString();
+        filteredDescription = table.getValueAt(i, 5).toString();
+        filteredCategory = ProductCategory.valueOf(table.getValueAt(i, 6).toString());
+        filteredGrossPrice = Double.parseDouble(table.getValueAt(i, 7).toString());
+        filteredNetPrice = Double.parseDouble(table.getValueAt(i, 8).toString());
+        filteredUrl = table.getValueAt(i, 9).toString();
+        filteredParameters = table.getValueAt(i, 10).toString();
+        filteredAvailable = Boolean.parseBoolean(table.getValueAt(i, 11).toString());
         //TODO - adjust it for current table size
-        //list.add(new Product(filteredEan,filteredName,filteredCategory,filteredAvailable));
+        list.add(new Product(filteredId, filteredEan, filteredSku, filteredName, filteredSeriesName, filteredDescription, filteredCategory, filteredGrossPrice, filteredNetPrice, filteredUrl, filteredParameters, filteredAvailable));
     }
 
     public int getNumberOfRows(){
