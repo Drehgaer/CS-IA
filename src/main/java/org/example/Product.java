@@ -1,21 +1,21 @@
 package org.example;
 
 public class Product {
-    String id;
+    int id;
     String ean;
     String sku;
     String name;
     String seriesName;
     ProductCategory category;
     String description;
-    String grossPrice;
-    String netPrice;
+    double grossPrice;
+    double netPrice;
     String url;
     String parameters;
     boolean available;
 
 
-    Product (String id, String ean, String sku, String name, String seriesName, String description, ProductCategory category, String grossPrice, String netPrice, String url, String parameters, boolean available ) {
+    Product (int id, String ean, String sku, String name, String seriesName, String description, ProductCategory category, double grossPrice, double netPrice, String url, String parameters, boolean available ) {
         this.id = id;
         this.ean = ean;
         this.sku = sku;
@@ -35,7 +35,7 @@ public class Product {
             return false;
         }
     */
-    public String getId() {return id;}
+    public int getId() {return id;}
     public String getEan() {
         return ean;
     }
@@ -46,8 +46,8 @@ public class Product {
     public String getSeriesName() {return seriesName;}
     public String getDescription() {return description;}
     public ProductCategory getCategory() {return category;}
-    public String getGrossPrice(){return grossPrice;}
-    public String getNetPrice(){return netPrice;}
+    public double getGrossPrice(){return grossPrice;}
+    public double getNetPrice(){return netPrice;}
     public String getUrl() {return url;}
     public String getParameters() {return parameters;}
     public boolean isAvailable() {return available;}

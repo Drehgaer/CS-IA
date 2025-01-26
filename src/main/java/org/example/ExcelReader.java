@@ -17,15 +17,15 @@ public class ExcelReader {
     public static Product[] readExcelFile(File excelFile) throws FileNotFoundException {
         String string = "";
         String temp = "";
-        String newId = "";
+        int newId = 0;
         String newEan = "";
         String newSku = "";
         String newName = "";
         String newSeriesName = "";
         String newDescription = "";
         ProductCategory newCategory = null;
-        String newGrossPrice = "";
-        String newNetPrice = "";
+        double newGrossPrice = 0;
+        double newNetPrice = 0;
         String newUrl = "";
         String newParameters = "";
         Boolean newAvailable = false;
@@ -79,7 +79,7 @@ public class ExcelReader {
                 }
                 System.out.println(i);
                 if (i ==0){
-                    newId = temp;
+                    newId = (int) Double.parseDouble(temp);
                 }else if (i == 1){
                     newEan = temp;
                 }else if (i == 2){
@@ -93,9 +93,9 @@ public class ExcelReader {
                 } else if (i == 6) {
                     newCategory = ProductCategory.valueOf(temp);
                 }else if (i == 7){
-                    newGrossPrice = temp;
+                    newGrossPrice = Double.parseDouble(temp);
                 }else if (i == 8){
-                    newNetPrice = temp;
+                    newNetPrice = Double.parseDouble(temp);
                 }else if (i == 9){
                     newUrl = temp;
                 }else if (i == 10){

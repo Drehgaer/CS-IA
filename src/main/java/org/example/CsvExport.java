@@ -15,7 +15,7 @@ public class CsvExport {
             FileWriter csv = new FileWriter(fileName);
             for (int i = 0; i < model.getRowCount(); i++) {
                 for (int j = 0; j < model.getColumnCount(); j++) {
-                    csv.write(model.getValueAt(i, j).toString());
+                    csv.write(model.getValueAt(i, j).toString().replace(System.lineSeparator(), "¶"));
                     csv.write("\n");
                 }
             }
