@@ -18,8 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class MaineFrame extends JFrame implements ActionListener {
-    JMenu menu, submenu;
-    JMenuItem open, save, export, filter, i4, i5;
+    JMenu menu, export;
+    JMenuItem open, filter, toCSV, toXML;
     Dimension dimension = new Dimension(1000,1000);
     JPanel left;
     JPanel top;
@@ -34,6 +34,7 @@ public class MaineFrame extends JFrame implements ActionListener {
     Thread thread2;
     int numberOfRows;
     JButton filterClearButton;
+    Product [] currentProducts;
 
     MaineFrame(){
         this.setPreferredSize(dimension);
@@ -80,17 +81,16 @@ public class MaineFrame extends JFrame implements ActionListener {
         menu=new JMenu("Menu");
         //submenu=new JMenu("Sub Menu");
         open =new JMenuItem("Open...");
-        save =new JMenuItem("Save");
-        export =new JMenuItem("Export");
+        export =new JMenu("Export...");
         filter =new JMenuItem("Filter");
-        //i4=new JMenuItem("Item 4");
-        //i5=new JMenuItem("Item 5");
-        menu.add(open); menu.add(save); menu.add(export);menu.add(filter);
-        //submenu.add(i4); submenu.add(i5);
+        toCSV =new JMenuItem("to CSV");
+        toXML =new JMenuItem("to XML");
+        menu.add(open); menu.add(export);menu.add(filter);
+        export.add(toCSV); export.add(toXML);
         open.addActionListener(this);
         filter.addActionListener(this);
-        export.addActionListener(this);
-        //menu.add(submenu);
+        toCSV.addActionListener(this);
+        toXML.addActionListener(this);
         mb.add(menu);
 
         //this.add(textField, BorderLayout.CENTER);
@@ -149,10 +149,15 @@ public class MaineFrame extends JFrame implements ActionListener {
             thread1.start();
             thread2.start();
         }
-        if(e.getSource()== export) {
+        if(e.getSource()== toCSV) {
             long time = System.currentTimeMillis();
             java.util.Date timeAndDate =new java.util.Date(time);
             CsvExport.exportToCSV(table, ("report-" + timeAndDate + ".csv"));
+        }
+        if(e.getSource()== toXML) {
+            long time = System.currentTimeMillis();
+            java.util.Date timeAndDate =new java.util.Date(time);
+            XmlExporter.exportToXml(currentProducts, ("report-" + timeAndDate + ".xml"));
         }
         if(e.getSource()== filterClearButton) {
             try {
@@ -163,6 +168,7 @@ public class MaineFrame extends JFrame implements ActionListener {
         }
     }
     public void showTable(Product[] products){
+        currentProducts = products;
         numberOfRows = products.length;
         model.setRowCount(products.length);
         table.setPreferredSize(new Dimension(1000, 16*numberOfRows));
@@ -240,7 +246,6 @@ public class MaineFrame extends JFrame implements ActionListener {
     public int getNumberOfRows(){
         return numberOfRows;
     }
-
 
 }
 
